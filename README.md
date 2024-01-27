@@ -1,3 +1,4 @@
 # Diver Debby
 
-Guide diver debby through the dangerous oceans.
+A scene made in react three fiber with 3D AI assets.
+
