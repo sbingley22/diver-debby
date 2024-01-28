@@ -18,10 +18,10 @@ export function Model(props) {
   useFrame(() => {
     // Rotate the model back and forth when hovered
     if (isHovered) {
-      meshRef.current.rotation.y += 0.01 * rotateDir.current;
+      meshRef.current.rotation.y += 0.005 * rotateDir.current;
 
-      if (meshRef.current.rotation.y > 1) rotateDir.current = -1
-      else if (meshRef.current.rotation.y < -1) rotateDir.current = 1
+      if (meshRef.current.rotation.y > 0.2) rotateDir.current = -1
+      else if (meshRef.current.rotation.y < -0.2) rotateDir.current = 1
     }
   });
 

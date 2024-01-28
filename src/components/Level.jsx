@@ -6,6 +6,7 @@ import * as Rubble2 from "../models/OceanRubble2"
 import * as SeaMine from "../models/SeaMine"
 import * as Shark from "../models/Shark"
 import { useRef, useState } from "react"
+import { Debby } from "../models/DiverDebby"
 
 const Level = () => {
   const rotFish = useRef(0)
@@ -23,6 +24,8 @@ const Level = () => {
       <ambientLight intensity={0.1} />
       <spotLight position={[5, 12, -5]} angle={0.3} penumbra={1} castShadow />
       <InvisiblePlane />
+
+      <Debby />
 
       <Fish.Model position={[2,0,0]} rotation={[0, 0, 0]} />
       <Fish.Model position={[2.5,-1,0]} rotation={[0, Math.PI * 0.03, 0]} />

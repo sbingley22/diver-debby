@@ -4,14 +4,40 @@ Command: npx gltfjsx@6.2.16 public/dev/shark.glb -s -T
 Files: public/dev/shark.glb [497.26KB] > D:\Web_Projects\Games\diver-debby\shark-transformed.glb [119.34KB] (76%)
 */
 
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber';
 
 export function Model(props) {
   const { nodes, materials } = useGLTF('/shark-transformed.glb')
+
+  const meshRef = useRef();
+  const [isHovered, setHover] = useState(false);
+  const rotateDir = useRef(1)
+
+  useFrame(() => {
+    // Rotate the model back and forth when hovered
+    if (isHovered) {
+      meshRef.current.rotation.y += 0.004 * rotateDir.current;
+
+      if (meshRef.current.rotation.y > 0.1) rotateDir.current = -1
+      else if (meshRef.current.rotation.y < -0.1) rotateDir.current = 1
+    }
+  });
   return (
-    <group {...props} dispose={null}>
-      <mesh castShadow receiveShadow geometry={nodes.mesh.geometry} material={materials.base_material} rotation={[Math.PI / 2, 0, 0]} scale={1.663} />
+    <group {...props} dispose={null}
+    >
+      <mesh 
+        castShadow 
+        receiveShadow 
+        geometry={nodes.mesh.geometry} 
+        material={materials.base_material} 
+        rotation={[Math.PI / 2, 0, 0]} 
+        scale={1.663} 
+        ref={meshRef}
+        onPointerOver={() => setHover(true)}
+        onPointerOut={() => setHover(false)}
+      />
     </group>
   )
 }
